@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { Ref, ref, watchEffect } from "vue";
+import { computed, Ref, ref, watch } from "vue";
 import CategorySelector from "./components/CategorySelector.vue";
 import UnitSelector from "./components/UnitSelector.vue";
-
-const units = Object.freeze({
-  length: ["centimeter", "meter", "kilometer"],
-  area: ["square centimeter", "square meter", "square kilometer"],
-  volume: ["cubic centimeter", "cubic meter", "cubic kilometer"],
-  temperature: ["celsius", "kelvin", "fahrenheit"],
-  weight: ["milligram", "gram", "kilogram"],
-  time: ["second", "minute", "hour"],
-});
+import { units, Unit } from "./lib/units";
 
 const categories = Object.keys(units);
 
-const input: Ref<number | null> = ref(null);
-const output: Ref<number | null> = ref(null);
-
 const selectedCategory = ref(categories[0]);
 
-const selectedInputUnit = ref("");
-const selectedOutputUnit = ref("");
+const selectedInputUnit: Ref<Unit> = ref(units[selectedCategory.value][0]);
+const selectedOutputUnit: Ref<Unit> = ref(units[selectedCategory.value][0]);
 
-watchEffect(() => {
+const input: Ref<number | null> = ref(null);
+const output = computed(() =>
+  selectedOutputUnit.value.to(selectedInputUnit.value.from(input.value ?? 0))
+);
+
+const swap = () => {
+  input.value = output.value;
+
+  [selectedInputUnit.value, selectedOutputUnit.value] = [
+    selectedOutputUnit.value,
+    selectedInputUnit.value,
+  ];
+};
+
+watch(selectedCategory, () => {
   selectedOutputUnit.value = selectedInputUnit.value =
     units[selectedCategory.value][0];
 });
-
-input.value = 232353.33;
-output.value = input.value;
 </script>
 
 <template>
@@ -51,7 +51,7 @@ output.value = input.value;
           autofocus
         />
 
-        <div class="flex justify-center items-center">
+        <div class="flex justify-center items-center" @click="swap">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-4 w-4 sm:h-6 sm:w-6 text-slate-500 cursor-pointer"
