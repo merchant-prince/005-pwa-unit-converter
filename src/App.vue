@@ -30,7 +30,7 @@ output.value = input.value;
 <template>
   <main class="w-full h-full grid place-content-center">
     <article class="space-y-4 p-2">
-      <nav class="flex justify-between">
+      <nav class="flex justify-between sm:space-x-4">
         <CategorySelector
           v-for="category in categories"
           :key="category"
@@ -39,7 +39,7 @@ output.value = input.value;
         />
       </nav>
 
-      <section class="flex space-x-2">
+      <section class="flex space-x-2 sm:space-x-4">
         <input
           v-model.number="input"
           type="number"
@@ -50,7 +50,7 @@ output.value = input.value;
         <div class="flex justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 text-slate-500 cursor-pointer"
+            class="h-4 w-4 sm:h-6 sm:w-6 text-slate-500 cursor-pointer"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -73,7 +73,7 @@ output.value = input.value;
         />
       </section>
 
-      <section class="flex space-x-8">
+      <section class="flex space-x-8 sm:space-x-14">
         <UnitSelector
           v-model="selectedInputUnit"
           :units="units[selectedCategory]"

@@ -11,7 +11,7 @@ const { name, modelValue } = toRefs(props);
 
 <template>
   <button
-    class="border-2 p-2 rounded-full cursor-pointer uppercase"
+    class="border-2 p-2 sm:px-4 rounded-full cursor-pointer uppercase"
     :class="[
       modelValue === name
         ? 'text-white border-orange-400 bg-orange-400 shadow-md'
