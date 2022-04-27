@@ -24,22 +24,22 @@ const selectedInputUnit = ref(units[selectedCategory.value][0]);
 const selectedOutputUnit = ref(units[selectedCategory.value][0]);
 
 input.value = 232353.33;
-output.value = 443434.33;
+output.value = input.value;
 </script>
 
 <template>
   <main class="w-full h-full grid place-content-center">
-    <article class="space-y-4">
-      <div class="flex space-x-3 mb-4">
+    <article class="space-y-4 p-2">
+      <nav class="flex justify-between">
         <CategorySelector
           v-for="category in categories"
           :key="category"
           v-model="selectedCategory"
           :name="category"
         />
-      </div>
+      </nav>
 
-      <div class="flex space-x-4">
+      <section class="flex space-x-2">
         <input
           v-model.number="input"
           type="number"
@@ -50,7 +50,7 @@ output.value = 443434.33;
         <div class="flex justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="shrink-0 h-6 w-6 text-slate-500 cursor-pointer"
+            class="h-4 w-4 text-slate-500 cursor-pointer"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -64,14 +64,16 @@ output.value = 443434.33;
           </svg>
         </div>
 
-        <p
+        <input
+          v-model.number="output"
+          type="number"
           class="w-full p-2 border-2 border-gray-800 rounded-md bg-white shadow-md hide-controls"
-        >
-          {{ output }}
-        </p>
-      </div>
+          autofocus
+          readonly
+        />
+      </section>
 
-      <div class="flex space-x-14">
+      <section class="flex space-x-8">
         <UnitSelector
           v-model="selectedInputUnit"
           :units="units[selectedCategory]"
@@ -80,7 +82,7 @@ output.value = 443434.33;
           v-model="selectedOutputUnit"
           :units="units[selectedCategory]"
         />
-      </div>
+      </section>
     </article>
   </main>
 </template>

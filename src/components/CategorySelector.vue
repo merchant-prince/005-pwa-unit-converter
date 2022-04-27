@@ -10,8 +10,8 @@ const { name, modelValue } = toRefs(props);
 </script>
 
 <template>
-  <div
-    class="border-2 px-4 py-1 rounded-full cursor-pointer uppercase"
+  <button
+    class="border-2 p-2 rounded-full cursor-pointer uppercase"
     :class="[
       modelValue === name
         ? 'text-white border-orange-400 bg-orange-400 shadow-md'
@@ -19,6 +19,6 @@ const { name, modelValue } = toRefs(props);
     ]"
     @click="emit('update:modelValue', name)"
   >
-    {{ name }}
-  </div>
+    {{ name[0] }}<span class="hidden sm:inline">{{ name.slice(1) }}</span>
+  </button>
 </template>
