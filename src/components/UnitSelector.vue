@@ -23,7 +23,7 @@ const { units, modelValue } = toRefs(props);
           ? 'text-white bg-orange-400 shadow-md'
           : 'text-gray-800',
       ]"
-      :data-test="`unit-${unit.name}`"
+      :data-test="`unit-${unit.name.split(' ').join('-')}`"
       @click="emit('update:modelValue', unit)"
     >
       {{ unit.name }}
