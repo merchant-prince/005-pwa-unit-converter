@@ -1,27 +1,31 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
+import { Ref, ref, watchEffect } from "vue";
 import CategorySelector from "./components/CategorySelector.vue";
 import UnitSelector from "./components/UnitSelector.vue";
 
-const categories = [
-  "length",
-  "area",
-  "volume",
-  "temperature",
-  "weight",
-  "time",
-];
+const units = Object.freeze({
+  length: ["centimeter", "meter", "kilometer"],
+  area: ["square centimeter", "square meter", "square kilometer"],
+  volume: ["cubic centimeter", "cubic meter", "cubic kilometer"],
+  temperature: ["celsius", "kelvin", "fahrenheit"],
+  weight: ["milligram", "gram", "kilogram"],
+  time: ["second", "minute", "hour"],
+});
 
-const units = {
-  length: ["millimeter", "centimeter", "meter", "kilometer"],
-};
+const categories = Object.keys(units);
 
 const input: Ref<number | null> = ref(null);
 const output: Ref<number | null> = ref(null);
 
 const selectedCategory = ref(categories[0]);
-const selectedInputUnit = ref(units[selectedCategory.value][0]);
-const selectedOutputUnit = ref(units[selectedCategory.value][0]);
+
+const selectedInputUnit = ref("");
+const selectedOutputUnit = ref("");
+
+watchEffect(() => {
+  selectedOutputUnit.value = selectedInputUnit.value =
+    units[selectedCategory.value][0];
+});
 
 input.value = 232353.33;
 output.value = input.value;
