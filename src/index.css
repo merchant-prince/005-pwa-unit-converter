@@ -11,6 +11,15 @@
 }
 
 @layer utilities {
+  .hide-controls::-webkit-outer-spin-button,
+  .hide-controls::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .hide-controls[type="number"] {
+    -moz-appearance: textfield;
+  }
+
   .hide-scrollbar::-webkit-scrollbar {
     width: 0;
     height: 0;
