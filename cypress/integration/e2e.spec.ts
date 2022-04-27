@@ -39,17 +39,35 @@ describe("Application Test", () => {
 
   describe("length", () => {
     describe("input --> output", () => {
-      it("converts cm to cm");
-      it("converts cm to m");
-      it("converts cm to km");
+      before(() => {
+        cy.visit("/");
 
-      it("converts m to cm");
-      it("converts m to m");
-      it("converts m to km");
+        cy.get('[data-test="category-length"]').click();
+      });
 
-      it("converts km to cm");
-      it("converts km to m");
-      it("converts km to km");
+      it("converts cm to cm", () => {
+        cy.get(
+          '[data-test="input-units"] [data-test="unit-centimeter"]'
+        ).click();
+        cy.get(
+          '[data-test="output-units"] [data-test="unit-centimeter"]'
+        ).click();
+
+        cy.get('[data-test="input"]').type("{selectAll}42");
+
+        cy.get('[data-test="output"]').should("contain.value", 42);
+      });
+
+      // it("converts cm to m");
+      // it("converts cm to km");
+
+      // it("converts m to cm");
+      // it("converts m to m");
+      // it("converts m to km");
+
+      // it("converts km to cm");
+      // it("converts km to m");
+      // it("converts km to km");
     });
 
     // describe("input <-- output", () => {
