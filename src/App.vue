@@ -50,6 +50,7 @@ watch(selectedCategory, () => {
           type="number"
           class="w-full p-2 border-2 border-gray-800 rounded-md bg-white shadow-md hide-controls"
           autofocus
+          data-test="input"
         />
 
         <div class="flex justify-center items-center">
@@ -60,6 +61,7 @@ watch(selectedCategory, () => {
           v-model.number="output"
           type="number"
           class="w-full p-2 border-2 border-gray-800 rounded-md bg-white shadow-md hide-controls"
+          data-test="output"
         />
       </section>
 
@@ -67,10 +69,12 @@ watch(selectedCategory, () => {
         <UnitSelector
           v-model="selectedInputUnit"
           :units="units[selectedCategory]"
+          data-test="input-units"
         />
         <UnitSelector
           v-model="selectedOutputUnit"
           :units="units[selectedCategory]"
+          data-test="output-units"
         />
       </section>
     </article>

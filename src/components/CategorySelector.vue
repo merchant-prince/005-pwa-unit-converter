@@ -17,6 +17,7 @@ const { name, modelValue } = toRefs(props);
         ? 'text-white border-orange-400 bg-orange-400 shadow-md'
         : 'text-gray-800 border-gray-800',
     ]"
+    :data-test="`category-${name}`"
     @click="emit('update:modelValue', name)"
   >
     {{ name[0] }}<span class="hidden sm:inline">{{ name.slice(1) }}</span>
