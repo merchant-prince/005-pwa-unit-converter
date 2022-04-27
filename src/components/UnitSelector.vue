@@ -11,7 +11,7 @@ const { units, modelValue } = toRefs(props);
 
 <template>
   <div
-    class="h-52 p-2 border-2 bg-white border-gray-800 rounded-md shadow-md overflow-y-auto hide-scrollbar"
+    class="w-full h-52 p-2 border-2 bg-white border-gray-800 rounded-md shadow-md overflow-y-auto hide-scrollbar"
   >
     <p
       v-for="unit in units"
