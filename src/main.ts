@@ -8,4 +8,4 @@ import "./index.css";
 //   registerSW();
 // }
 
-createApp(App).mount("#app");
+createApp(App).mount("#application");
