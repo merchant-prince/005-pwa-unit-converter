@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, Ref, ref, watch } from "vue";
+import { Ref, ref, watch } from "vue";
 import CategorySelector from "./components/CategorySelector.vue";
 import UnitSelector from "./components/UnitSelector.vue";
 import { units, Unit } from "./lib/units";
