@@ -12,18 +12,19 @@ const selectedInputUnit: Ref<Unit> = ref(units[selectedCategory.value][0]);
 const selectedOutputUnit: Ref<Unit> = ref(units[selectedCategory.value][0]);
 
 const input: Ref<number | null> = ref(null);
-const output = computed(() =>
-  selectedOutputUnit.value.to(selectedInputUnit.value.from(input.value ?? 0))
-);
+const output: Ref<number | null> = ref(null);
 
-const swap = () => {
-  input.value = output.value;
+watch([input, selectedInputUnit, selectedOutputUnit], () => {
+  output.value = selectedOutputUnit.value.fromBaseUnitToCurrentUnit(
+    selectedInputUnit.value.fromCurrentUnitToBaseUnit(input.value ?? 0)
+  );
+});
 
-  [selectedInputUnit.value, selectedOutputUnit.value] = [
-    selectedOutputUnit.value,
-    selectedInputUnit.value,
-  ];
-};
+watch([output, selectedInputUnit, selectedOutputUnit], () => {
+  input.value = selectedInputUnit.value.fromBaseUnitToCurrentUnit(
+    selectedOutputUnit.value.fromCurrentUnitToBaseUnit(output.value ?? 0)
+  );
+});
 
 watch(selectedCategory, () => {
   selectedOutputUnit.value = selectedInputUnit.value =
@@ -51,29 +52,14 @@ watch(selectedCategory, () => {
           autofocus
         />
 
-        <div class="flex justify-center items-center" @click="swap">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 sm:h-6 sm:w-6 text-slate-500 cursor-pointer"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-            />
-          </svg>
+        <div class="flex justify-center items-center">
+          <p class="text-4xl text-slate-500">&equals;</p>
         </div>
 
         <input
           v-model.number="output"
           type="number"
           class="w-full p-2 border-2 border-gray-800 rounded-md bg-white shadow-md hide-controls"
-          autofocus
-          readonly
         />
       </section>
 
