@@ -15,7 +15,7 @@ const { name, modelValue } = toRefs(props);
     :class="[
       modelValue === name
         ? 'text-white border-orange-400 bg-orange-400 shadow-md'
-        : 'text-black border-black',
+        : 'text-gray-800 border-gray-800',
     ]"
     @click="emit('update:modelValue', name)"
   >
