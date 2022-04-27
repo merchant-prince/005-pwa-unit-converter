@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import { toRefs } from "vue";
 
-const props = defineProps<{ value: string; modelValue: string }>();
+const props = defineProps<{ name: string; modelValue: string }>();
 const emit = defineEmits<{
   (eventName: "update:modelValue", value: string): void;
 }>();
 
-const { value, modelValue } = toRefs(props);
+const { name, modelValue } = toRefs(props);
 </script>
 
 <template>
   <div
-    class="border-2 px-4 py-1 rounded-full"
+    class="border-2 px-4 py-1 rounded-full cursor-pointer"
     :class="[
-      modelValue == value
+      modelValue === name
         ? 'text-white border-orange-400 bg-orange-400 shadow-md'
         : 'text-black border-black',
     ]"
-    @click="emit('update:modelValue', value)"
+    @click="emit('update:modelValue', name)"
   >
-    {{ value }}
+    {{ name }}
   </div>
 </template>
