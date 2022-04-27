@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { toRefs } from "vue";
+import { Unit } from "../lib/units";
 
-const props = defineProps<{ modelValue: string; units: string[] }>();
+const props = defineProps<{ modelValue: Unit; units: Unit[] }>();
 const emit = defineEmits<{
-  (eventName: "update:modelValue", value: string): void;
+  (eventName: "update:modelValue", value: Unit): void;
 }>();
 
 const { units, modelValue } = toRefs(props);
@@ -15,17 +16,17 @@ const { units, modelValue } = toRefs(props);
   >
     <p
       v-for="unit in units"
-      :key="unit"
+      :key="unit.name"
       class="cursor-pointer px-2 py-1 rounded-md"
       :class="[
-        modelValue === unit
+        modelValue.name === unit.name
           ? 'text-white bg-orange-400 shadow-md'
           : 'text-gray-800',
       ]"
-      :data-test="`unit-${unit}`"
+      :data-test="`unit-${unit.name}`"
       @click="emit('update:modelValue', unit)"
     >
-      {{ unit }}
+      {{ unit.name }}
     </p>
   </div>
 </template>
